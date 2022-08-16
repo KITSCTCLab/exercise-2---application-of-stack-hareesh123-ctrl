@@ -1,3 +1,4 @@
+import operator
 class Evaluate:
   """This class validates and evaluate postfix expression.
   Attributes:
@@ -25,15 +26,23 @@ class Evaluate:
       True if it is empty, else returns False.
     """
       # Write your code here
+    if len(self.stack)==0:
+        return True
+    else:
+        return False
 
 
-  def pop(self):
+  def _pop(self):
     """
     Do pop operation if the stack is not empty.
     Returns:
       The data which is popped out if the stack is not empty.
     """
     # Write your code here
+    if self.isEmpty():
+      print("Your stack is empty")
+    else:
+        return self.stack.pop()
 
 
   def push(self, operand):
@@ -43,6 +52,13 @@ class Evaluate:
       operand: The operand to be pushed.
     """
     # Write your code here
+    self.operand = operand
+    if len(self.stack)==self.size_of_stack:
+      print("Your stack is full")
+    else:
+        self.stack.append(self.operand)
+        self.top+=1
+       
 
 
   def validate_postfix_expression(self, expression):
@@ -53,25 +69,4 @@ class Evaluate:
     Returns:
       True if the expression is valid, else returns False.
     """
-    # Write your code here
-
-
-  def evaluate_postfix_expression(self, expression):
-    """
-    Evaluate the postfix expression
-    Arguments:
-      expression: A String which represents the the expression to be evaluated
-    Returns:
-      The result of evaluated postfix expression.
-    """
-    # Write your code here
-
-
-# Do not change the following code
-postfix_expression = input()  # Read postfix expression
-tokens = postfix_expression.split()
-evaluate = Evaluate(len(tokens))
-if evaluate.validate_postfix_expression(tokens):
-    print(evaluate.evaluate_postfix_expression(tokens))
-else:
-    print('Invalid postfix expression')
+    for x in expression:
